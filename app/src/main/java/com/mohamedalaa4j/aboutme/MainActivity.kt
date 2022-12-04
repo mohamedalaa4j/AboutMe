@@ -4,30 +4,42 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.mohamedalaa4j.aboutme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private var binding: ActivityMainBinding? = null
+
+    private val myNameObj = MyName("Mohamed")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        findViewById<Button>(R.id.btnDone).setOnClickListener {
+        //Assign object to the data variable
+        binding?.myName = myNameObj
+
+        binding?.btnDone?.setOnClickListener {
             addNickname(it)
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
     private fun addNickname(view: View) {
-        val etNickName = findViewById<EditText>(R.id.etNickName)
-        val tvNickname = findViewById<TextView>(R.id.tvNickname)
 
-        tvNickname.text = etNickName.text
-        tvNickname.visibility = View.VISIBLE
+        binding?.apply {
+            myName?.nickname = etNickName.text.toString()
+            tvNickname.visibility = View.VISIBLE
 
-        etNickName.visibility = View.INVISIBLE
-        view.visibility = View.GONE
+            invalidateAll()
+            etNickName.visibility = View.GONE
+            btnDone.visibility=View.GONE
+        }
 
         hideKeyboard(view)
     }

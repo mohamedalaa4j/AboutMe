@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:paddingStart="@dimen/padding"
+    android:paddingEnd="@dimen/padding"
     tools:context=".MainActivity">
 
     <TextView
+        style="@style/textStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/mohamed_alaa"
-        android:textAlignment="center"
-        style="@style/textStyle" />
+        android:textAlignment="center" />
 
     <ImageView
         android:id="@+id/startImage"
@@ -20,8 +22,33 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/layout_margin"
-        app:srcCompat="@android:drawable/btn_star_big_on"
         android:contentDescription="@string/yellow_star"
-        />
+        app:srcCompat="@android:drawable/btn_star_big_on" />
 
+    <ScrollView
+        android:id="@+id/bioScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/layout_margin"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_profile"
+                />
+
+            <TextView
+                style="@style/textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.7"
+                android:text="@string/bio" />
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
